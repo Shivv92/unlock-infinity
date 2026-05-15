@@ -41,11 +41,26 @@
                     animation: {
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float-hover': 'float-hover 3s ease-in-out infinite',
+                        'slide-in': 'slide-in 0.8s ease-out',
+                        'scale-in': 'scale-in 0.6s ease-out',
                     },
                     keyframes: {
                         glow: {
                             '0%': { boxShadow: '0 0 10px #00f0ff, 0 0 20px #00f0ff' },
                             '100%': { boxShadow: '0 0 20px #8a2be2, 0 0 40px #8a2be2' }
+                        },
+                        'float-hover': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        'slide-in': {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        'scale-in': {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
                         }
                     }
                 }
@@ -141,6 +156,42 @@
             background: rgba(0, 240, 255, 0.1);
             border-left: 3px solid #00f0ff;
         }
+
+        /* Enhanced Card Animations */
+        .course-card {
+            animation: scale-in 0.6s ease-out;
+        }
+
+        .course-card:hover {
+            animation: float-hover 3s ease-in-out infinite;
+        }
+
+        /* Smooth reveal on scroll */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stat counter animation */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: scale-in 1s ease-out;
+            background: linear-gradient(90deg, #00f0ff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Section entrance */
+        .section-title {
+            animation: slide-in 0.8s ease-out;
+        }
     </style>
 </head>
 <body class="font-body antialiased selection:bg-neon-cyan selection:text-dark">
@@ -179,13 +230,36 @@
             <!-- Mobile Menu Btn -->
             <button class="md:hidden text-2xl text-neon-cyan focus:outline-none"><i class="ph ph-list"></i></button>
         </div>
-    </nav>
-
     <!-- Hero Banner (Batch Promotion) -->
-    <section class="pt-32 pb-12 px-6 relative z-10 min-h-[90vh] flex items-center">
-        <div class="max-w-7xl mx-auto w-full">
+        </div>
+    </section>
             <div class="glass-panel rounded-2xl overflow-hidden flex flex-col md:flex-row items-center">
+    <!-- Stats & Achievements Section -->
+    <section class="py-16 px-6 relative z-10 bg-deep/50 backdrop-blur-md border-y border-neon-cyan/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal-on-scroll">
+                    <div class="stat-number mb-2">50K+</div>
+                    <p class="text-gray-400 font-display tracking-wider">ACTIVE STUDENTS</p>
+                </div>
+                <div class="reveal-on-scroll">
+                    <div class="stat-number mb-2">200+</div>
+                    <p class="text-gray-400 font-display tracking-wider">COURSES</p>
+                </div>
+                <div class="reveal-on-scroll">
+                    <div class="stat-number mb-2">95%</div>
+                    <p class="text-gray-400 font-display tracking-wider">SUCCESS RATE</p>
+                </div>
+                <div class="reveal-on-scroll">
+                    <div class="stat-number mb-2">24/7</div>
+                    <p class="text-gray-400 font-display tracking-wider">SUPPORT</p>
+                </div>
+            </div>
+        </div>
+    </section>
                 <!-- Text Content -->
+    <!-- Why Choose Us / Features -->
+    <section class="py-24 relative z-10">
                 <div class="p-8 md:p-12 md:w-1/2">
                     <span class="gsap-reveal inline-block py-1 px-3 rounded text-xs font-bold tracking-widest bg-neon-purple/20 text-neon-purple border border-neon-purple/30 mb-4 shadow-[0_0_10px_rgba(138,43,226,0.3)]">
                         NEW ACADEMY BATCH
@@ -480,6 +554,99 @@
                     </div>
                 </div>
 
+                <!-- NEW DEGREE COURSES -->
+                <div class="course-card rounded-xl p-5 flex flex-col gsap-card">
+                    <div class="h-40 bg-gray-800 rounded-lg mb-4 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute top-2 left-2 bg-neon-pink text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1 font-display tracking-widest shadow-[0_0_10px_#ff003c]">DEGREE</div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-1 text-white">BBA (Business Admin)</h3>
+                    <p class="text-sm text-neon-pink mb-4 font-display tracking-wider text-xs">MANAGEMENT</p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Business Management</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Financial Analysis</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Entrepreneurship</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto border-t border-gray-800 pt-4">
+                        <div><span class="text-2xl font-bold font-display text-white">₹4499</span><span class="text-sm text-gray-500 line-through ml-2">₹8999</span></div>
+                        <button class="px-4 py-2 bg-neon-pink text-white font-bold font-display text-sm tracking-widest rounded hover:bg-white hover:text-deep transition-colors">ENROLL</button>
+                    </div>
+                </div>
+
+                <div class="course-card rounded-xl p-5 flex flex-col gsap-card">
+                    <div class="h-40 bg-gray-800 rounded-lg mb-4 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1677442d019cecf3e4919a48fc8cf76da5e115fc2?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute top-2 left-2 bg-neon-purple text-white text-xs font-bold px-2 py-1 rounded font-display tracking-widest shadow-[0_0_10px_#8a2be2]">DEGREE</div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-1 text-white">M.Tech AI & ML</h3>
+                    <p class="text-sm text-neon-purple mb-4 font-display tracking-wider text-xs">ADVANCED TECH</p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> Deep Learning</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> NLP & Vision</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> Research</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto border-t border-gray-800 pt-4">
+                        <div><span class="text-2xl font-bold font-display text-white">₹5999</span></div>
+                        <button class="px-4 py-2 bg-neon-purple text-white font-bold font-display text-sm tracking-widest rounded hover:bg-white hover:text-deep transition-colors">ENROLL</button>
+                    </div>
+                </div>
+
+                <div class="course-card rounded-xl p-5 flex flex-col gsap-card">
+                    <div class="h-40 bg-gray-800 rounded-lg mb-4 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-1 text-white">Data Science Analytics</h3>
+                    <p class="text-sm text-neon-cyan mb-4 font-display tracking-wider text-xs">DATA SKILLS</p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-center gap-2"><i class="ph text-neon-cyan ph-check-circle"></i> Python & R</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-cyan ph-check-circle"></i> Big Data Tools</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-cyan ph-check-circle"></i> Case Studies</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto border-t border-gray-800 pt-4">
+                        <div><span class="text-2xl font-bold font-display text-white">₹2999</span></div>
+                        <button class="px-4 py-2 bg-neon-cyan text-deep font-bold font-display text-sm tracking-widest rounded hover:bg-white transition-colors">ENROLL</button>
+                    </div>
+                </div>
+
+                <div class="course-card rounded-xl p-5 flex flex-col gsap-card">
+                    <div class="h-40 bg-gray-800 rounded-lg mb-4 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1633356713697-d53c8ac6e85f?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-1 text-white">Cloud & DevOps</h3>
+                    <p class="text-sm text-neon-purple mb-4 font-display tracking-wider text-xs">INFRASTRUCTURE</p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> AWS/Azure/GCP</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> Docker Kubernetes</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-purple ph-check-circle"></i> CI/CD Pipelines</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto border-t border-gray-800 pt-4">
+                        <div><span class="text-2xl font-bold font-display text-white">₹3499</span></div>
+                        <button class="px-4 py-2 border border-neon-purple text-neon-purple font-bold font-display text-sm tracking-widest rounded hover:bg-neon-purple hover:text-white transition-colors">EXPLORE</button>
+                    </div>
+                </div>
+
+                <div class="course-card rounded-xl p-5 flex flex-col gsap-card">
+                    <div class="h-40 bg-gray-800 rounded-lg mb-4 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1638920591993-13526f4b13c8?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-70">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-1 text-white">Cybersecurity Hacking</h3>
+                    <p class="text-sm text-neon-pink mb-4 font-display tracking-wider text-xs">SECURITY</p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 flex-1">
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Network Security</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Penetration Testing</li>
+                        <li class="flex items-center gap-2"><i class="ph text-neon-pink ph-check-circle"></i> Incident Response</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto border-t border-gray-800 pt-4">
+                        <div><span class="text-2xl font-bold font-display text-white">₹3999</span></div>
+                        <button class="px-4 py-2 bg-neon-pink text-white font-bold font-display text-sm tracking-widest rounded hover:bg-white hover:text-deep transition-colors">ENROLL</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -704,11 +871,25 @@
         // 3. GSAP Scroll Animations
         gsap.registerPlugin(ScrollTrigger);
 
+        // Scroll reveal for stats
+        function handleScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal-on-scroll');
+            reveals.forEach((elem) => {
+                const windowHeight = window.innerHeight;
+                const elementTop = elem.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    elem.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScrollReveal);
+
         // Ensure animations start after load
         window.onload = () => {
             animate(); // Start 3D Background
 
-            // Hero Elements Entrance
+            // Hero Elements Entrance with enhanced stagger
             gsap.fromTo('.gsap-reveal', 
                 { y: 50, opacity: 0 }, 
                 { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
@@ -722,16 +903,27 @@
                 );
             });
 
-            // Scroll Triggers for Cards
+            // Scroll Triggers for Cards with improved timing
             gsap.fromTo('.gsap-card',
-                { y: 50, opacity: 0 },
-                { scrollTrigger: { trigger: '#batches', start: "top 75%" }, y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "back.out(1.7)" }
+                { y: 50, opacity: 0, rotateX: -10 },
+                { scrollTrigger: { trigger: '#batches', start: "top 75%" }, y: 0, opacity: 1, rotateX: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)" }
             );
             
             gsap.fromTo('#video-player .gsap-card',
                 { y: 50, opacity: 0 },
-                { scrollTrigger: { trigger: '#video-player', start: "top 75%" }, y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "back.out(1.7)" }
+                { scrollTrigger: { trigger: '#video-player', start: "top 75%" }, y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)" }
             );
+
+            // Animate feature cards with scroll
+            gsap.utils.toArray('.glass-panel[style*="border"]').forEach((panel, index) => {
+                gsap.fromTo(panel,
+                    { opacity: 0, scale: 0.9 },
+                    { scrollTrigger: { trigger: panel, start: "top 85%" }, opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
+                );
+            });
+
+            // Call initial scroll check
+            handleScrollReveal();
         };
     </script>
 </body>
