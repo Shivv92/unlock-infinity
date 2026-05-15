@@ -1,0 +1,41 @@
+:root{
+  --bg1:#04031a;
+  --bg2:#0b0f2a;
+  --accent:#6be4ff;
+  --muted:#bfc7d6;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background: linear-gradient(120deg,var(--bg1),var(--bg2));
+  color:#fff; overflow:hidden;
+}
+.scene{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.stars{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);background-size:3px 3px;opacity:0.6;animation: drift 60s linear infinite}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-200px)}}
+.hero{position:relative;z-index:2;text-align:center;padding:6rem 1.5rem}
+.logo{width:160px;height:160px;object-fit:contain;border-radius:20px;box-shadow:0 10px 30px rgba(11,14,30,0.6);animation: float 6s ease-in-out infinite}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
+.title{font-size:2.6rem;margin:1rem 0 0.3rem;letter-spacing:0.6px}
+.subtitle{color:var(--muted);margin:0.5rem 0 1.6rem}
+.actions{display:flex;gap:12px;justify-content:center}
+.btn{display:inline-block;padding:0.75rem 1.2rem;border-radius:10px;background:linear-gradient(90deg,var(--accent),#8b8bff);color:#031025;text-decoration:none;font-weight:600;box-shadow:0 6px 20px rgba(107,228,255,0.12);transform:translateZ(0);transition:transform .18s ease,box-shadow .18s ease}
+.btn:active{transform:translateY(2px)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(107,228,255,0.12)}
+
+/* subtle entrance */
+.logo, .title, .subtitle, .actions{opacity:0;transform:translateY(18px);animation: enter 1s forwards;}
+.logo{animation-delay:.1s}
+.title{animation-delay:.25s}
+.subtitle{animation-delay:.4s}
+.actions{animation-delay:.55s}
+@keyframes enter{to{opacity:1;transform:translateY(0)}}
+
+/* responsive */
+@media (max-width:640px){.logo{width:120px;height:120px}.title{font-size:1.8rem}}
+
+/* accent animated rings */
+.hero::after{content:"";position:absolute;left:50%;top:50%;width:420px;height:420px;border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(107,228,255,0.06);filter:blur(12px);pointer-events:none;mix-blend-mode:screen}
+.hero::before{content:"";position:absolute;left:50%;top:50%;width:220px;height:220px;border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(139,139,255,0.06);animation: spin 20s linear infinite;pointer-events:none}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
